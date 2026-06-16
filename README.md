@@ -60,7 +60,7 @@ PUT /api/products/1
 ```text
 200 OK - Product was updated successfully
 404 Not Found - Product ID does not exist
-400 Bad Request - Category is missing or categoryId does not exist
+400 Bad Request - categoryId does not exist
 ```
 
 ## Notes
