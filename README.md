@@ -11,7 +11,7 @@ POST /api/products
 ```
 
 **Request Body**
-> Category is optionalso you can leave it out if you want and it will just be null when created
+> Category is optional. You can leave it out if you want and it will just be null when created
 ```json
 {
   "name": "New Product",
