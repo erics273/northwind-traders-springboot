@@ -65,7 +65,7 @@ PUT /api/products/1
 
 ## Notes
 
-The `category` object only needs to include the `categoryId`.
+The `category` object only needs to include the `categoryId`. It is optional on the create method
 
 ```json
 {
