@@ -11,7 +11,7 @@ POST /api/products
 ```
 
 **Request Body**
-
+> Category is optionalso you can leave it out if you want and it will just be null when created
 ```json
 {
   "name": "New Product",
@@ -26,7 +26,7 @@ POST /api/products
 
 ```text
 201 Created - Product was created successfully
-400 Bad Request - Category is missing or categoryId does not exist
+400 Bad Request - categoryId does not exist
 ```
 
 ## Update Product
