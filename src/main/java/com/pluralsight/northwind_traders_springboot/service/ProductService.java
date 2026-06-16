@@ -13,9 +13,11 @@ import java.util.Optional;
 public class ProductService {
 
     ProductRepository productRepository;
+    CategoryRepository categoryRepository;
 
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository, CategoryRepository categoryRepository) {
         this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     public List<Product> getAllProducts(){
@@ -26,5 +28,32 @@ public class ProductService {
         return productRepository.findById(id);
     }
 
+    public Product createProduct(Product product) {
+        if (product.getCategory() != null) {
+            int categoryId = product.getCategory().getCategoryId();
+            Category category = categoryRepository.findById(categoryId)
+                    .orElseThrow(() -> new RuntimeException("Category not found"));
+            product.setCategory(category);
+        }
+
+        return productRepository.save(product);
+    }
+
+    public Product updateProduct(int id, Product updatedProduct) {
+
+        Product existingProduct = productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        int categoryId = updatedProduct.getCategory().getCategoryId();
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+
+        existingProduct.setName(updatedProduct.getName());
+        existingProduct.setPrice(updatedProduct.getPrice());
+        existingProduct.setCategory(category);
+
+        return productRepository.save(existingProduct);
+
+    }
 
 }
