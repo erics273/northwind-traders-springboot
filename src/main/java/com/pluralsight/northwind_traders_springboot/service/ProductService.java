@@ -30,9 +30,11 @@ public class ProductService {
 
     public Product createProduct(Product product) {
         if (product.getCategory() != null) {
+
             int categoryId = product.getCategory().getCategoryId();
             Category category = categoryRepository.findById(categoryId)
                     .orElseThrow(() -> new RuntimeException("Category not found"));
+
             product.setCategory(category);
         }
 
@@ -44,13 +46,16 @@ public class ProductService {
         Product existingProduct = productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 
-        int categoryId = updatedProduct.getCategory().getCategoryId();
-        Category category = categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new RuntimeException("Category not found"));
+        if(updatedProduct.getCategory() != null){
+            int categoryId = updatedProduct.getCategory().getCategoryId();
+            Category category = categoryRepository.findById(categoryId)
+                    .orElseThrow(() -> new RuntimeException("Category not found"));
+            existingProduct.setCategory(category);
+        }
 
         existingProduct.setName(updatedProduct.getName());
         existingProduct.setPrice(updatedProduct.getPrice());
-        existingProduct.setCategory(category);
+
 
         return productRepository.save(existingProduct);
 
