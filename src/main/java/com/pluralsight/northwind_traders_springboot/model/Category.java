@@ -1,9 +1,15 @@
 package com.pluralsight.northwind_traders_springboot.model;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Categories")
+@JsonPropertyOrder({
+        "categoryId",
+        "name",
+        "description"
+})
 public class Category {
 
     @Id

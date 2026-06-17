@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 @JsonPropertyOrder({
         "productId",
         "name",
-        "UnitPrice",
+        "price",
         "category"
 })
 public class Product {
@@ -27,6 +27,18 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "CategoryID")
     private Category category;
+
+    @ManyToOne
+    @JoinColumn(name = "SupplierID")
+    private Supplier supplier;
+
+    public Supplier getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
+    }
 
     public int getProductId() {
         return productId;

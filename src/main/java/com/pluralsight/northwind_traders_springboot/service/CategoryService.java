@@ -16,11 +16,11 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    List<Category> getAllCategories(){
+    public List<Category> getAllCategories(){
         return categoryRepository.findAll();
     }
 
-    public Optional<Category> getSessionById(int id) {
+    public Optional<Category> getCategoryById(int id) {
         return categoryRepository.findById(id);
     }
 
