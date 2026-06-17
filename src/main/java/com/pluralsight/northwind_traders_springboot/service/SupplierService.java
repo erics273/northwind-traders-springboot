@@ -17,6 +17,10 @@ public class SupplierService {
         this.supplierRepository = supplierRepository;
     }
 
+    public Supplier createSuppler(Supplier supplier){
+        return supplierRepository.save(supplier);
+    }
+
     public List<Supplier> getAllSuppliers(){
         return supplierRepository.findAll();
     }

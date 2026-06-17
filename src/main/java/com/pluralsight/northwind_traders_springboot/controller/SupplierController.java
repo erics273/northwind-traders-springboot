@@ -4,11 +4,9 @@ import com.pluralsight.northwind_traders_springboot.model.Category;
 import com.pluralsight.northwind_traders_springboot.model.Supplier;
 import com.pluralsight.northwind_traders_springboot.service.CategoryService;
 import com.pluralsight.northwind_traders_springboot.service.SupplierService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,6 +30,16 @@ public class SupplierController {
         return supplierService.getSupplierById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
+    public ResponseEntity<Supplier> createCategory(@RequestBody Supplier supplier){
+        try {
+            Supplier createdSupplier = supplierService.createSuppler(supplier);
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdSupplier);
+        } catch (RuntimeException ex) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
 }
